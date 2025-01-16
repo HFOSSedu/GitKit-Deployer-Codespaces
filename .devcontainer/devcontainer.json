@@ -1,0 +1,10 @@
+{
+    "image" : "registry.gitlab.com/hfossedu/kits/kitscript:codespace",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker": {
+			"version": "latest",
+			"enableNonRootDocker": "true",
+			"moby": "true"
+		}
+    }
+}
