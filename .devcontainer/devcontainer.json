@@ -6,5 +6,6 @@
 			"enableNonRootDocker": "true",
 			"moby": "true"
 		}
-    }
+    },
+    "postStartCommand": "/home/vscode/.local/kitscript/.venv/bin/python -m kitscript deploy.yaml"
 }
