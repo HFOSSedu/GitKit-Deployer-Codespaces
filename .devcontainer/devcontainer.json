@@ -10,6 +10,9 @@
     "customizations": {
         "vscode": {
             "settings": {
+		"workbench": {
+			"startupEditor": "terminal"
+		},
                 "tasks": {
                     "version": "2.0.0",
                     "tasks": [
