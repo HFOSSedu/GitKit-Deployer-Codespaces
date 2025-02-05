@@ -10,20 +10,75 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "workbench.startupEditor": "terminal",
                 "tasks": {
                     "version": "2.0.0",
                     "tasks": [
                         {
-                            "label": "deploy",
+                            "label": "Open FarmData Dev Environment",
+                            "dependsOrder": "sequence",
+                            "dependsOn": [
+                                "Hide UI Elements",
+                                "Run deploy.bash"
+                            ],
+                            "runOptions": {
+                              "runOn": "folderOpen"
+                            },
+                            "presentation": {
+                              "reveal": "never"
+                            }
+                        },
+                        {
+                            "label": "Run deploy.bash",
                             "type": "shell",
                             "command": ".devcontainer/deploy.bash",
-                            "runOptions": {
-                                "runOn": "folderOpen"
+                            "presentation": {
+                                "reveal": "always"
                             }
+                        },
+                        {
+                            "label": "Hide UI Elements",
+                            "type": "process",
+                            "command": "${input:hideUIElements}",
+                            "presentation": {
+                              "reveal": "never"
+                            },
+                            "inputs": [
+                                {
+                                    // Hides some additional VSCode UI elements for which there
+                                    // are no settings available.
+                                    "id": "hideUIElements",
+                                    "type": "command",
+                                    "command": "runCommands",
+                                    "args": {
+                                        "commands": [
+                                            "workbench.action.terminal.moveToEditor",
+                                            "workbench.action.terminal.focus",
+                                            "workbench.action.closeAllEditors",
+                                            "workbench.action.closeAllEditorsInGroup",
+                                            "workbench.action.closeAllGroups",
+                                            "workbench.action.closeSidebar",
+                                            "workbench.action.closePanel"
+                                        ]
+                                    }
+                                }
+                            ]
                         }
                     ]
-                }
+                },
+                "workbench.startupEditor": "terminal",
+                "workbench.activityBar.location": "hidden",
+                "workbench.statusBar.visible": false,
+                "window.commandCenter": false,
+                "window.menuBarVisibility": "hidden",
+                "workbench.editor.restoreViewState": false,
+                "workbench.editor.editorActionsLocation": "hidden",
+                "workbench.editor.showTabs": "none",
+                "workbench.layoutControl.enabled": false,
+                "breadcrumbs.enabled": false,
+                "extensions.ignoreRecommendations": true,
+                "window.restoreWindows": "none",
+                "terminal.integrated.hideOnStartup": "always",
+                "github.codespaces.devcontainerChangedNotificationStyle": "none"
             }
         }
     }
