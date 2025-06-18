@@ -87,6 +87,7 @@ run:
 
   - GH_TOKEN:
       description: |+
+
         Personal Access token
         ---------------------
 
@@ -133,6 +134,22 @@ run:
 
   - |
     echo "
+
+    Done!
+    -----
+
+    Give the URL below to your students.
+
+        ${REPO_URL}
+
+    To Create Another
+    -----------------
+
+    If you need to create another, you can open a new terminal (CTRL+SHIFT+~)
+    and run the deployer again:
+
+        .devcontainer/deploy.bash
+
     A Short Survey for Research
     ---------------------------
 
@@ -141,12 +158,5 @@ run:
     we kindly request your participation in this brief survey:
 
         https://drexel.qualtrics.com/jfe/form/SV_81y8BL0zy3fBw22
-
-    Done!
-    -----
-
-    Your new repository is ready. Give the URL below to your students.
-
-        ${REPO_URL}
 
     "
