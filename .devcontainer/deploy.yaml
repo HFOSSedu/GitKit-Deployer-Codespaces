@@ -13,6 +13,34 @@ run:
       echo "GITKIT_DOCKER_TAG detected: ${GITKIT_DOCKER_TAG}"
     fi
 
+  - |
+    echo "
+    GitKit Deployer
+    ===============
+
+    Before we begin, here are some useful things to know.
+
+      * Need help? Ask on Discord: https://discord.gg/83Sb4csCeT
+      * You can stop the deployer at anytime by pressing CTRL+C .
+      * You can restart the deployer by running the command below in a terminal:
+
+          .devcontainer/deploy.bash
+    
+    OK, let's get started.
+    "
+
+  - |
+    echo "
+    Location of the new repository
+    ------------------------------
+
+    We'll create the new repository that will become the upstream repository
+    that you will share with your class. The new repository will be created
+    at a URL with the following form:
+
+        https://github.com/OWNER/NAME
+    "
+
   - GITKIT_DOCKER_TAG:
       if-empty:
       value: latest
@@ -20,11 +48,10 @@ run:
   - ORG_NAME:
       if-empty:
       description: |
-
-        We will create a new repository that will become the upstream repository
-        that you will share with your class. We will create it at the following URL:
-
-            https://github.com/OWNER/NAME
+      
+        The OWNER can be your personal account on GitHub, or it may
+        be an organization for your course on GitHub that you write
+        permissions for. It must already exist.
 
       prompt: "Please enter the OWNER of the new repository: "
       validator:
@@ -37,6 +64,15 @@ run:
 
   - REPO_NAME:
       if-empty:
+      description: |
+      
+        The NAME of the new repository can be any name you like.
+        We recommed GitKit-FarmData2. If you need to create multiple
+        instances for your class, you can suffix this name for each
+        group: e.g., GitKit-FarmData2-Group1, GitKit-FarmData2-Group2, etc.
+        You'll need to rerun this deployer for each instance you want
+        to create.
+
       prompt: "Please enter the NAME of the new repository: "
       validator:
         regex: "^[a-zA-Z0-9-_]{,100}$"
@@ -45,11 +81,15 @@ run:
           Rules:
           - Only alphanumeric, hyphen, and underscore characters.
           - No more than 100 characters.
+      default: GitKit-FarmData2
 
   - REPO_URL: "https://github.com/${ORG_NAME}/${REPO_NAME}"
 
   - GH_TOKEN:
       description: |+
+        Personal Access token
+        ---------------------
+
         To create the repository, we need a personal access token
         with appropriate permissions.
 
@@ -62,6 +102,20 @@ run:
 
       prompt: "Please paste the token you generated (input is not displayed): "
       secret: True
+      validator:
+        regex: "^ghp_[a-zA-Z0-9]+$"
+        tip: |+
+
+          Common problems...
+          * You did not paste your PAT. Maybe your keyboard focus was in a different frame?
+          * You may have pasted your PAT multiple times.
+
+          What to do about it...
+          1. Copy your PAT from GitHub again (it's OK if you need to generate a new one.)
+          2. Return here and click into the terminal to give it the focus.
+          3. Press CTRL+V (CMD+SHIFT+V on Mac) and press enter.
+          4. If you get this same message again,
+             instead try CTRL+SHIFT+V (CMD+SHIFT+V on Mac) and press enter.
 
   - |
     echo "
@@ -79,14 +133,20 @@ run:
 
   - |
     echo "
-    Your new repository is ready. Give the URL below to your students.
-
-        ${REPO_URL}
+    A Short Survey for Research
+    ---------------------------
 
     As part of our NSF-funded project, we are gathering information on the use of GitKit.
     If you are currently integrating GitKit into a course you are instructing,
     we kindly request your participation in this brief survey:
 
         https://drexel.qualtrics.com/jfe/form/SV_81y8BL0zy3fBw22
+
+    Done!
+    -----
+
+    Your new repository is ready. Give the URL below to your students.
+
+        ${REPO_URL}
 
     "
