@@ -55,7 +55,7 @@ run:
 
       prompt: "Please enter the OWNER of the new repository: "
       validator:
-        regex: "^[a-zA-Z0-9][a-zA-Z0-9_]{,38}$"
+        regex: "^(gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9]{22}_[A-Za-z0-9]{59})$"
         tip: |
 
           Rules:
