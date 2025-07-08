@@ -55,12 +55,11 @@ run:
 
       prompt: "Please enter the OWNER of the new repository: "
       validator:
-        regex: "^(gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9]{22}_[A-Za-z0-9]{59})$"
+        regex: "^[a-zA-Z0-9-_]+$"
         tip: |
 
           Rules:
-          - Only alphanumeric and underscore characters.
-          - No more than 38 characters.
+          - Only alphanumeric and dash characters.
 
   - REPO_NAME:
       if-empty:
@@ -75,12 +74,12 @@ run:
 
       prompt: "Please enter the NAME of the new repository: "
       validator:
-        regex: "^[a-zA-Z0-9-_]{,100}$"
+        regex: "^[a-zA-Z0-9-_.]+$"
         tip: |
 
           Rules:
-          - Only alphanumeric, hyphen, and underscore characters.
-          - No more than 100 characters.
+          - Only alphanumeric, underscore, dash, and dot characters.
+
       default: GitKit-FarmData2
 
   - REPO_URL: "https://github.com/${ORG_NAME}/${REPO_NAME}"
@@ -104,7 +103,7 @@ run:
       prompt: "Please paste the token you generated (input is not displayed): "
       secret: True
       validator:
-        regex: "^ghp_[a-zA-Z0-9]+$"
+        regex: "^(gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9]{22}_[A-Za-z0-9]{59})$"
         tip: |+
 
           Common problems...
