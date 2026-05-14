@@ -7,3 +7,9 @@ To deploy a GitKit for your class...
 2. Follow the prompts in the terminal.
 
 3. When it's done, stop your codespace to save your credits.
+
+If nothing happens after the codespace has fully loaded, open a terminal (`ctrl+\``) and run the following command.
+
+```bash
+.devcontainer/deploy.bash
+```
